@@ -1,0 +1,56 @@
+// listener
+let headSubMenu = $('.about-submenu');
+let headListWrapper = $('.list-wrapper li');
+let headListWrapperResp = $('.list-wrapper-resp li');
+let imgSelected = $('.img-wrapper div');
+let imgReset = $('.img-wrapper');
+let loginBox = $('.t-part #login');
+let overlay = $('<div>', {
+  class: 'overlay'
+});
+let log = false;
+
+let logOutIcon = $('<i>', {
+  class: 'fa fa-user',
+  'aria-hidden':'true'
+});
+
+let imgOne = $('.gallery-wrapper img');	
+let imageArray = ['img/1.jpg','img/2.jpg','img/3.jpg','img/4.jpg','img/5.jpg','img/6.jpg']
+let SmallOverlay = $('<div>', {
+  class: 'small-overlay'
+});
+
+
+//snake 
+//let go, foodGo, boomGo;
+let map = 60;
+let body_snake = [];
+let head_snake = [8,5];
+let direction = 'down';
+let speed = 350;
+let speed_food = 8000;
+let boom_freq = 4000;
+let overlaySnake = $('<div>', {
+  class: 'overlaySnake'
+});
+
+let snakeBox = $('.snake-game');
+let findSnakePlace = $('.snake-game').find('.snake-start');
+
+
+
+//other games
+let sniperGame = $('.sniper-game');
+let gameBan = $('<i>',{
+	class: 'fa fa-ban',
+	'aria-hidden':'true'
+});
+
+let gameBanText = $('<span>',{
+	text:'You must be logged in!'
+});
+
+let gameBanWrapper = $('<div>',{
+	class:'ban-wrapper'
+});

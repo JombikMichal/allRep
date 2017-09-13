@@ -1,0 +1,189 @@
+
+
+/*************head dropdown menu******************************/
+
+headListWrapper.on('mouseenter',function(){
+	$(this).find('ul').fadeIn(500);
+});
+headListWrapper.on('mouseleave',function(){
+	$(this).find('ul').hide();
+});
+
+/************head dropdown menu resp ************************/
+headListWrapperResp.on('mouseenter',function(){
+	$(this).find('ul').fadeIn(500);
+});
+headListWrapperResp.on('mouseleave',function(){
+	$(this).find('ul').hide();
+});
+
+/***********************img size efect ************************/
+overlay.appendTo('body');
+
+
+gameBanWrapper.append(gameBan);
+gameBanWrapper.append(gameBanText);
+SmallOverlay.append(gameBanWrapper);
+// sniperGame.append(SmallOverlay);
+// snakeBox.append(SmallOverlay);
+
+
+imgSelected.on('mouseenter',function(){
+	$(this).addClass('zoom-in');
+	$(this).siblings().addClass('zoom-out')
+});
+
+imgSelected.on('mouseleave',function(){
+	$(this).removeClass('zoom-in');
+	$(this).siblings().removeClass('zoom-out');
+	
+});
+
+
+
+
+loginBox.on('click', function(e) {
+  resetAfterLog();
+  $("body").css("overflow", "hidden");
+  let findDivLogSec = $('.login-section').find('.div-box');
+  findDivLogSec.appendTo(overlay);
+
+  overlay.show();
+  findDivLogSec.show();
+});
+
+$(document).on('keydown', function(e) {
+  if(e.which === 27) {
+    overlay.hide();
+    $("body").css("overflow", "auto");
+     let findDivLogSec = $('.login-section').find('.div-box');
+  	findDivLogSec.parent().remove();
+  }
+});
+
+
+
+
+
+sniperGame.on('mouseenter', function(){
+	if(!log){
+		sniperGame.append(SmallOverlay);
+		SmallOverlay.show();
+	}
+});
+sniperGame.on('mouseleave', function(){
+	SmallOverlay.hide();
+});
+
+snakeBox.on('mouseenter', function(e){
+	if(!log){
+		snakeBox.append(SmallOverlay);
+		SmallOverlay.show();
+	}
+});
+snakeBox.on('mouseleave', function(){
+	SmallOverlay.hide();
+});
+
+
+
+
+
+/************************************* login - get value / verify***********************************/
+
+$('.btn-sb-login').on('click', function() {
+ 	let userName = $('#userName').val();
+ 	let userPwd = $('#userPwd').val();
+
+ 	if(isNaN(verifyNumb(userPwd))){
+	 	$('#incorect-pwd').show();
+ 	}
+ 	else if (verifyLog(userName,userPwd)) {
+ 		$("body").css("overflow", "auto");
+ 		$('#login').hide();	
+ 		overlay.hide();
+ 		resetAfterLog();
+ 		$('#logout span').text(userName);
+ 		$('#logout').show();
+ 		log = true;
+ 	}
+
+ });
+ 	
+
+ 	$('#logout').on('click',function(e){
+ 		$(this).hide();
+ 		$('#login').show();
+ 		log = false;
+ 	});
+
+
+
+function verifyNumb(numberPwd){
+	return parseInt(numberPwd);
+}
+
+
+function verifyLog(userName, userPwd){
+	if(userName === 'michal' && userPwd === '007'){
+			return true;
+	}
+	else {return false;}
+}
+
+
+function resetAfterLog(){
+	 $('#incorect-pwd').hide();
+	 $('#userName').val('');
+ 	 $('#userPwd').val('');
+}
+
+
+
+
+/*********************************** gallery ************************************************/
+
+function changeImgsGallery(){
+	$('.gallery-wrapper').find('img').eq(getRandomIntInclusive(0,6)).attr('src', imageArray[getRandomIntInclusive(0,6)]);
+};
+
+
+
+
+function changeGalleryImgResp(){
+	$('.img-one-resp img').attr('src',imageArray[getRandomIntInclusive(0,6)]);	
+}
+
+
+
+
+function getRandomIntInclusive(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+}
+
+
+
+
+/******************************** scroll document*************************************/
+
+$('.about-submenu a').on('click', function(e) {
+  e.preventDefault();
+  let galleryId = $(this).attr('href');
+  let gallery = $(galleryId);
+  let offset = gallery.offset().top;
+
+  $('body').animate({
+    scrollTop: offset
+  }, 1000, function() {
+    window.location.hash = galleryId;
+  });
+});
+
+
+
+/******************************* start section ***************************/
+$(document).ready(function(){
+	
+	setInterval(changeGalleryImgResp,3000);
+	setInterval(changeImgsGallery,800);
+});
